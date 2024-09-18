@@ -48,6 +48,15 @@ types:
             salesPrice: number
             quantity: integer
             tax: number
+  Order:
+    type: object
+    properties:
+      orderNo: string
+      orderDate: string
+      title: string
+      description: string
+      createdByDate: string
+      createdBy: string
 
 /purchase-orders:
   post:
@@ -82,6 +91,27 @@ types:
                   }
               ]
           }
+  /{orderNo}:
+    uriParameters:
+      orderNo:
+        type: string
+        description: The order number of the purchase order
+    get:
+      description: Retrieve a purchase order by order number
+      responses:
+        200:
+          body:
+            application/json:
+              type: Order
+              example: |
+                {
+                  "orderNo": "PO0002",
+                  "orderDate": "2024-01-02T00:00:00.000+00:00",
+                  "title": "Purchase new soft drink",
+                  "description": "test",
+                  "createdByDate": "2024-01-02T00:00:00.000+00:00",
+                  "createdBy": "AnhNDT17"
+                }
 
 /sales-orders:
   post:
@@ -116,3 +146,24 @@ types:
                   }
               ]
           }
+  /{orderNo}:
+    uriParameters:
+      orderNo:
+        type: string
+        description: The order number of the sales order
+    get:
+      description: Retrieve a sales order by order number
+      responses:
+        200:
+          body:
+            application/json:
+              type: Order
+              example: |
+                {
+                  "orderNo": "SO0001",
+                  "orderDate": "2024-01-03T00:00:00.000+00:00",
+                  "title": "Deliver a soft drink",
+                  "description": "test",
+                  "createdByDate": "2024-01-03T00:00:00.000+00:00",
+                  "createdBy": "AnhNDT17"
+                }

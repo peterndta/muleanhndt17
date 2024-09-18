@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="get:\sales-orders\(orderNo):anhndt17-config" doc:id="2471826c-2441-4d23-baf8-4b23479a24ff" >
+		<http:request method="GET" doc:name="Request" doc:id="0df8469f-23c8-4ba7-97a3-7a11f16a2d67" config-ref="HTTP_Request_configuration" path="/sales-orders">
+			<http:uri-params ><![CDATA[#[{
+	orderNo : attributes.uriParams.orderNo
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
+</mule>
