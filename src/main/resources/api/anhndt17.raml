@@ -1,0 +1,118 @@
+#%RAML 1.0
+title: AnhNDT17
+baseUri: localhost:8080/api
+
+types:
+  PurchaseOrder:
+    type: object
+    properties:
+      order:
+        type: object
+        properties:
+          orderNo: string
+          orderDate: string
+          title: string
+          description: string
+          createdByDate: string
+          createdBy: string
+      details:
+        type: array
+        items:
+          type: object
+          properties:
+            orderNo: string
+            productCode: string
+            quantity: integer
+            purchasePrice: number
+            tax: number
+
+  SalesOrder:
+    type: object
+    properties:
+      order:
+        type: object
+        properties:
+          orderNo: string
+          orderDate: string
+          title: string
+          description: string
+          createdByDate: string
+          createdBy: string
+      details:
+        type: array
+        items:
+          type: object
+          properties:
+            orderNo: string
+            productCode: string
+            salesPrice: number
+            quantity: integer
+            tax: number
+
+/purchase-orders:
+  post:
+    description: Create a new purchase order
+    body:
+      application/json:
+        type: PurchaseOrder
+        example: |
+          {
+              "order": {
+                  "orderNo": "PO0002",
+                  "orderDate": "2024-01-02",
+                  "title": "Purchase new soft drink",
+                  "description": "test",
+                  "createdByDate": "2024-01-02",
+                  "createdBy": "AnhNDT17"
+              },
+              "details": [
+                  {
+                      "orderNo": "PO0002",
+                      "productCode": "A00001",
+                      "quantity": 5,
+                      "purchasePrice": 201,
+                      "tax": 5
+                  },
+                  {
+                      "orderNo": "PO0002",
+                      "productCode": "B00001",
+                      "quantity": 5,
+                      "purchasePrice": 101,
+                      "tax": 5
+                  }
+              ]
+          }
+
+/sales-orders:
+  post:
+    description: Create a new sales order
+    body:
+      application/json:
+        type: SalesOrder
+        example: |
+          {
+              "order": {
+                  "orderNo": "SO0001",
+                  "orderDate": "2024-01-03",
+                  "title": "Deliver a soft drink",
+                  "description": "test",
+                  "createdByDate": "2024-01-03",
+                  "createdBy": "AnhNDT17"
+              },
+              "details": [
+                  {
+                      "orderNo": "SO0001",
+                      "productCode": "A00001",
+                      "salesPrice": 401,
+                      "quantity": 10,
+                      "tax": 10
+                  },
+                  {
+                      "orderNo": "SO0001",
+                      "productCode": "B00001",
+                      "salesPrice": 301,
+                      "quantity": 8,
+                      "tax": 10
+                  }
+              ]
+          }

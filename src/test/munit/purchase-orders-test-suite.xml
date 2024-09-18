@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<munit:config name="purchase-orders-test-suite.xml" />
+	<munit:test name="purchase-orders-test-suite-post:\purchase-orders:application\json:anhndt17-successt" doc:id="b9156fbb-0553-4af5-bdb1-49c064962246" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="ca8d09f3-15c6-4696-84f0-5536c82c3f56" >
+				<munit:payload value="#[readUrl('classpath://purchaseorderstestresources/mock_request_payload_success.dwl')]" />
+			</munit:set-event>
+			<ee:transform doc:name="Transform Message" doc:id="dbc7e518-fdfb-4731-9c7c-3220357b4e7b" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<flow-ref doc:name="Flow-ref to post:\purchase-orders:application\json:anhndt17-config" doc:id="e151fa26-228d-4b44-a212-98b2833a1eb0" name="post:\purchase-orders:application\json:anhndt17-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert HTTP Status success" doc:id="0416e13e-3550-47fa-9416-d6a71ac9d6c9" actual="#[attributes.statusCode]" expected="#[200]" message='#["The HTTP status code is invalid"]'/>
+			<munit-tools:assert-equals doc:name="Assert POST Purchase Response" doc:id="faa34ccf-b16b-46ee-bd9d-d5c451ec2844" actual="#[payload]" message='#["Payload is not valid"]' expected="#[readUrl('classpath://purchaseorderstestresources/assert_equals_success_response.dwl')]"/>
+		</munit:validation>
+	</munit:test>
+    <!-- Validation Error Test -->
+    <!-- Test for Missing Required Attribute -->
+
+</mule>
