@@ -44,7 +44,8 @@
 						<workers>1</workers>
 						<workerType>MICRO</workerType>
 						<properties>
-							<Note>Hello</Note>
+							<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
 						</properties>
 					</cloudHubDeployment>
 					<classifier>---- select project type ----</classifier>
